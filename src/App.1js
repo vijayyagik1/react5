@@ -1,0 +1,63 @@
+ import { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [taskInput, setTaskInput] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("Amit");
+
+  const handleTaskInput = (e) => {
+    setTaskInput(e.target.value);
+  };
+
+  const handleAddTask = () => {
+    setTasks([...tasks, taskInput]);
+    setTaskInput("");
+  };
+
+  const handleIncreaseCount = () => {
+    setCount(count + 1);
+  };
+
+  const handleDecreaseCount = () => {
+    setCount(count - 1);
+  };
+
+  const handleNameChange = () => {
+    if (name === "Amit") {
+      setName("Rajan");
+    } else {
+      setName("Amit");
+    }
+  };
+
+  return (
+    <div className="App">
+      <h1>Task List</h1>
+      <div>
+        <input
+          type="text"
+          placeholder="Enter task"
+          value={taskInput}
+          onChange={handleTaskInput}
+        />
+        <button onClick={handleAddTask}>Add</button>
+      </div>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
+      <div>
+        <button onClick={handleIncreaseCount}>Increase</button>
+        <span>{count}</span>
+        <button onClick={handleDecreaseCount}>Decrease</button>
+      </div>
+      <div>
+        <button onClick={handleNameChange}>Change Name</button>
+        <span>{name}</span>
+      </div>
+    </div>
+  );
+}
